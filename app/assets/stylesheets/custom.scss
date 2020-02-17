@@ -1,0 +1,68 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* toppage　*/
+
+.back {
+    background-image: url("camping-691424_1280.jpg"); 
+    background-size: cover;
+    background-position:center top; 
+    min-height: calc(100vh - 1px);
+    width: 100%;
+    padding-top: 4rem;
+}
+
+.cover {
+    z-index: 0;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:rgba(0,0,0,0.3);
+}
+
+.catch_copy {
+    text-align: center;
+    position: relative;
+    padding-top: 10em;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.main_title {
+    font-size: 70px;
+}
+
+
+.main_link{
+    text-align: center;
+    padding: 6rem 6rem;
+    margin-top: 4rem; 
+    top: 50px;
+    .main_link_btn{
+        transform: translateX(-50%);
+        display: inline;
+        bottom: 2rem;
+        font-size: 2.5em;
+        color: #ffffff;
+        background: rgba(0, 0, 0, .3);
+        border: 1px solid #fff;
+        padding: 0.5rem 2rem;
+    }
+}
+
+
+/* header */
+
+#logo {
+    float: left;
+    font-size: 1.5em;
+    color: #fff;
+    text-transoform: uppercase;
+    letter-spacing: -1px;
+    padding-top: 9px;
+    left: 10px;
+}

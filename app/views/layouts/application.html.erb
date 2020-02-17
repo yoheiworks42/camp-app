@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=full_title(yield(:title))%></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<header class= "navbar navbar-fixed-top navbar-inverse">
+  		<div>
+  			<%=link_to "Home","#",id:"logo"%>
+  			<nav>
+  				<ul class="nav navbar-nav navbar-right"> <!--#右詰め-->
+  					<li><%=link_to "キャンプ場","#"%></li>
+  					<li><%=link_to "地図","#"%></li>
+  					<li><%=link_to "新規登録","/signup"%></li>
+  					<li><%=link_to "ログイン","#"%></li>
+  				</ul>
+  			</nav>
+  		</div>
+  	</header>
+  	<div>
+    	<%= yield %>
+    </div>
+  </body>
+</html>
