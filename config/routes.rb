@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get "/signup",to:'users#new'
+  post "/signup",to:"users#create"
 
   get 'users/show'
 
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
 
   get "/show",to:'static_pages#show'
 
-  #get 'static_pages/new'
+  resources :users
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
