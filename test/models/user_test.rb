@@ -5,7 +5,7 @@ class UserTest < ActiveSupport::TestCase
 
   def setup
     @user=User.new(name:"sample",email:"sample@example.com",
-      password: "foobar", password_confirm:"foobar") #PWとPW確認を追加する
+      password: "foobar", password_confirmation:"foobar") #PWとPW確認を追加する
   end
   
   test "should be valid" do
@@ -30,7 +30,7 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "email should not be too long" do
-    @user.email = "a"*244
+    @user.email = "a"*244 + "@example.com"
     assert_not @user.valid?
   end
   
@@ -44,13 +44,13 @@ class UserTest < ActiveSupport::TestCase
   
   #PW欄に記載があるか
   test "password should be present(nonblank)"do
-    @user.password = @user.password_confirm =""*6
+    @user.password = @user.password_confirmation =" "*6
     assert_not @user.valid?
   end
 
   #PWの文字数が足りているか  
   test "password should have a minimum length" do
-    @user.password = @user.password_confirm ="a"*5
+    @user.password = @user.password_confirmation ="a"*5
     assert_not @user.valid?
   end
 end

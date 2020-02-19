@@ -10,13 +10,18 @@
   <body>
   	<header class= "navbar navbar-fixed-top navbar-inverse">
   		<div class="container">
-  			<%=link_to "Home","#",id:"logo"%>
+  			<%=link_to "Home","/",id:"logo"%>
   			<nav>
   				<ul class="nav navbar-nav navbar-right"> <!--#右詰め-->
   					<li><%=link_to "キャンプ場","#"%></li>
   					<li><%=link_to "地図","#"%></li>
-  					<li><%=link_to "新規登録","/signup"%></li>
-  					<li><%=link_to "ログイン","#"%></li>
+  					<% if logged_in? %>
+    					<li><%=link_to current_user.name,current_user%></li>
+    					<li><%=link_to "ログアウト",logout_path, method: :delete%></li>
+            <% else %>
+    					<li><%=link_to "新規登録","/signup"%></li>
+    					<li><%=link_to "ログイン","/login"%></li>
+            <% end %>
   				</ul>
   			</nav>
   		</div>
