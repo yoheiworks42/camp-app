@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200218062442) do
+ActiveRecord::Schema.define(version: 20200224004039) do
 
-  create_table "places", force: :cascade do |t|
+  create_table "locations", force: :cascade do |t|
     t.text "name"
     t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "postcode"
   end
 
   create_table "users", force: :cascade do |t|
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(version: 20200218062442) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.boolean "admin", default: false
   end
 
 end
