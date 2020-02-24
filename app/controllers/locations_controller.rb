@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def index
-#    @location = Location.all
+    @locations = Location.all.order(created_at: :desc)
   end
 
   def show
