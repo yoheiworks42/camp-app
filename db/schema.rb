@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200224132224) do
+ActiveRecord::Schema.define(version: 20200225032322) do
 
   create_table "locations", force: :cascade do |t|
     t.text "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20200224132224) do
     t.string "password_digest"
     t.string "prof_img"
     t.string "img"
+    t.text "message"
   end
 
 end

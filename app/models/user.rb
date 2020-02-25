@@ -5,6 +5,9 @@ class User < ApplicationRecord
         uniqueness:{ case_sensitive: false} #アドレスの大文字小文字を無視した一意性を確認
     has_secure_password #PWの暗号化
     validates :password, presence: true, length:{minimum: 6} #PW最低6文字な
+    validates :message, presence: true, length:{ maximum: 140} #messageの検証
+
+
     mount_uploader :img, ImgUploader
    #validates   :img_size　#投稿は5MB以下に。
     

@@ -7,6 +7,6 @@
     <p>
         <%= image_tag @user.img.url if @user.img? %>
     </p>
-    <p>キャンプの写真を投稿するよ</p>
+    <p><%= @user.message%></p>
     <%= link_to "編集", "/users/#{@user[:id]}/edit"%>
 </div>
