@@ -1,9 +1,12 @@
 <% provide(:title, @user.name)%>
 <div class="center">
     <h1>
-        <%=gravatar_for @user%></br>
+        <!--%=gravatar_for @user%--></br>
         <%= @user.name%>
     </h1>
+    <p>
+        <%= image_tag @user.img.url if @user.img? %>
+    </p>
     <p>キャンプの写真を投稿するよ</p>
     <%= link_to "編集", "/users/#{@user[:id]}/edit"%>
 </div>

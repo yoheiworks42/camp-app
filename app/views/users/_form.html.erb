@@ -12,6 +12,11 @@
             
             <%=f.label :password_confirmation,"確認用パスワード"%>
             <%=f.password_field :password_confirmation, class: 'form-control'%>
+
+            <%=f.label :img,"画像"%>
+            <%=f.file_field :img, class: 'form-control'%>
+            
+            <p><%= f.check_box :remove_img %>画像を削除する</p>
             
             <br><%=f.submit yield(:button_text), class: "btn btn-primary"%>
 <%end%>

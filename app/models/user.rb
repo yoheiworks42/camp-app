@@ -4,5 +4,15 @@ class User < ApplicationRecord
     validates :email, presence: true, length: { maximum: 255}, #emailの検証
         uniqueness:{ case_sensitive: false} #アドレスの大文字小文字を無視した一意性を確認
     has_secure_password #PWの暗号化
-    validates :password, presence: true, length:{minimum: 6} #PW最低6文字な 
+    validates :password, presence: true, length:{minimum: 6} #PW最低6文字な
+    mount_uploader :img, ImgUploader
+   #validates   :img_size　#投稿は5MB以下に。
+    
+    private
+    
+    def img_size
+        if img.size > 5.megabytes
+            errors.add(:img, "5MB以下にしてください")
+        end
+    end
 end
