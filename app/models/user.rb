@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
 
     mount_uploader :img, ImgUploader
+    has_many :posts
    #validates   :img_size　#投稿は5MB以下に。
     
     private

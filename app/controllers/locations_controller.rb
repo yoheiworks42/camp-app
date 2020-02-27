@@ -7,6 +7,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+    @posts = @location.posts.paginate(page: params[:page])
   end
 
   def new
@@ -43,5 +44,5 @@ class LocationsController < ApplicationController
   def location_params #どういう機能だ？
     params.require(:location).permit(:name, :postcode, :address)
   end
-  
+
 end
