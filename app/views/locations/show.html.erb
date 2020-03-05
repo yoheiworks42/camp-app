@@ -2,13 +2,11 @@
     <h1><%= @location.name%></h1>
     <p>〒：<%= @location.postcode %></p>
     <p><%= @location.address%></p>
-    <p>地図API</p>
+    <!--地図API--><div id='map'>
     <%=link_to "写真を投稿する","/locations/#{@location[:id]}/post"%>
+    <h3>投稿画像一覧</h3>
 
-    <%if @location.posts.any? %>
-        <ol class="posts">
-            <%= image_tag @post.post_img.url if @post.post_img? %>
-        </ol>
-        <%= will_paginate @post %>
+    <% @location.posts.each do |post| %>
+        <%= image_tag post.post_img.url if post.post_img? %>
     <% end %>
 </div>

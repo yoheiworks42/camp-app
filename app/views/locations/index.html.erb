@@ -1,11 +1,10 @@
 <div class="center">
+    <%= image_tag @post.post_img %> 
     <h1>キャンプ場一覧</h1>
     <p><%=link_to "キャンプ場を追加する","/sugest"%></p>
-    
+       
     <% @locations.each do |location| %>
         <%=link_to location.name,"/locations/#{location.id}"%></br>
+
     <% end %>
-</div>
-<div>
-    
 </div>

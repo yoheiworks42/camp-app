@@ -1,40 +1,3 @@
-
-<h1 class="center">キャンプ場を追加する</h1>
-
-<div class="row"> <!--rowとcol~はbootstrapの一部-->
-    <div class="col-md-6 col-md-offset-3">
-        <%= form_for(@location) do |f| %>
-
-            <%=f.label :name,"キャンプ場名称" %>
-            <%=f.text_field :name, class: 'form-control' %>
-            
-            <%=f.label :postcode,"郵便番号"%>
-            <%=f.text_field :postcode, class: 'form-control'%>
-            
-            <%=f.label :address,"住所"%>
-            <%=f.text_field :address, class: 'form-control'%>
-            
-            <br><%=f.submit "登録する", class: "btn btn-primary"%>
-        <%end%>
-    </div>
-</div>
-
-
-<!-- 地名入力用のinputを追加 -->
-<input id="address" type="textbox" value="Sydney, NSW",class: 'form-control'>
-
-<!-- buttonをクリックしたらcodeAddressを実行　-->
-<input type="button" value="検索" onclick="codeAddress()",class: 'form-control'>
-<div id='map'>
-</div>
-
-<style>
-#map{
-  height: 400px;
-}
-</style>
-
-<script>
 /*
 mapを関数の外で定義(codeAddressでも使うため)
 geocoderを用意
@@ -73,5 +36,4 @@ function codeAddress(){
     }
   });
 }
-</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCf2NmqqxXxG-saIu65YG89aMshhkkT1EA&callback=initMap" async defer></script>

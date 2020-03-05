@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.1.6'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12.4'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
@@ -16,6 +16,10 @@ gem 'rails-controller-testing'
 gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '>= 4.9.4'
 gem 'fog-aws', '2.0.0'
+gem 'jquery-rails'
+
+gem 'gmaps4rails'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

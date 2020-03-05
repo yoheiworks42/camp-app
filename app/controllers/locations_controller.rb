@@ -3,11 +3,12 @@ class LocationsController < ApplicationController
 
   def index
     @locations = Location.all.order(created_at: :desc)
+    #@post = Post.all.order(created_at: :desc)
+    @post = Post.find_by(location_id: 2)
   end
 
   def show
     @location = Location.find(params[:id])
-    @posts = @location.posts.paginate(page: params[:page])
   end
 
   def new

@@ -4,28 +4,13 @@
     <title><%=full_title(yield(:title))%></title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> <!--javascript動かすように追加-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-  	<header class= "navbar navbar-fixed-top navbar-inverse">
-  		<div class="container">
-  			<%=link_to "Home","/",id:"logo"%>
-  			<nav>
-  				<ul class="nav navbar-nav navbar-right"> <!--#右詰め-->
-  					<li><%=link_to "キャンプ場","/index"%></li>
-  					<li><%=link_to "地図","#"%></li>
-  					<% if logged_in? %>
-    					<li><%=link_to current_user.name,current_user%></li>
-    					<li><%=link_to "ログアウト",logout_path, method: :delete%></li>
-            <% else %>
-    					<li><%=link_to "新規登録","/signup"%></li>
-    					<li><%=link_to "ログイン","/login"%></li>
-            <% end %>
-  				</ul>
-  			</nav>
-  		</div>
-  	</header>
+    <%= render "layouts/header" %>
   	<div>
     	<%= yield %>
     </div>

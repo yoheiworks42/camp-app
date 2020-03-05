@@ -1,0 +1,19 @@
+<header class= "navbar navbar-fixed-top navbar-inverse">
+  		<div class="container">
+  			<%=link_to "Home","/",id:"logo"%>
+  			 <span class="fa fa-bars menu-icon"></span>
+  			 <div class="col-sm-6">
+  				<ul class="nav navbar-nav navbar-right"> <!--#右詰め-->
+  					<li><%=link_to "キャンプ場","/index"%></li>
+  					<li><%=link_to "地図","#"%></li>
+  					<% if logged_in? %>
+    					<li><%=link_to current_user.name,current_user%></li>
+    					<li><%=link_to "ログアウト",logout_path, method: :delete%></li>
+                    <% else %>
+    					<li><%=link_to "新規登録","/signup"%></li>
+    					<li><%=link_to "ログイン","/login"%></li>
+                    <% end %>
+  				</ul>
+  			</div>
+  		</div>
+</header>

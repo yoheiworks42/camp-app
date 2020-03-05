@@ -4,4 +4,9 @@ class Location < ApplicationRecord
     validates :postcode, presence: true, length: { minimum: 6,maximum: 7}, #emailの検証
         uniqueness:{ case_sensitive: false} #アドレスの大文字小文字を無視した一意性を確認
     has_many :posts
+=begin   
+    def posts
+        return Post.where(location_id: self.id)
+    end
+=end
 end
