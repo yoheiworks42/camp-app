@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'locations#home'
+  get "/test",to:"locations#test" #テスト用ページ
   
   get "/signup",to:'users#new'
   post "/signup",to:"users#create"

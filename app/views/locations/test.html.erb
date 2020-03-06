@@ -1,5 +1,5 @@
 <nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarHeader">
 				<span class="sr-only">Toggle navigation</span>
@@ -13,14 +13,14 @@
 		<div class="collapse navbar-collapse navbar-right" id="navbarHeader">
 			<ul class="nav navbar-nav">
 				<li><%=link_to "キャンプ場","/index"%></li>
-  	 <li><%=link_to "地図","#"%></li>
-  	 <% if logged_in? %>
-    	<li><%=link_to current_user.name,current_user%></li>
-    	<li><%=link_to "ログアウト",logout_path, method: :delete%></li>
-    <% else %>
-    	<li><%=link_to "新規登録","/signup"%></li>
-		<a class="btn btn-default navbar-btn main_link_btn" href="/login">ログイン</a>
-    <% end %>
+  	            <li><%=link_to "地図","#"%></li>
+  	            <% if logged_in? %>
+    	            <li><%=link_to current_user.name,current_user%></li>
+    	            <li><%=link_to "ログアウト",logout_path, method: :delete%></li>
+                <% else %>
+    	            <li><%=link_to "新規登録","/signup"%></li>
+    	            <button type="button" class="btn btn-default navbar-btn"><%=link_to "ログイン","/login"%></button>
+                <% end %>
 			</ul>
 		</div>
 	</div>

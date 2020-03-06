@@ -1,6 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+
 /* universal *//*.を付けないと全ページ共通ってことか*/
 body {
   padding-top: 200px;
@@ -9,12 +11,10 @@ body {
 .center {
     text-align: center;
 }
-
-.container {
-  width: 1170px;
-  padding: 0 15px;
-  margin: 0 auto;
+.right{
+  text-align:right;
 }
+
 
 /* toppage　*/
 
@@ -61,28 +61,24 @@ body {
     top: 50px;
 
     .main_link_btn{
-        transform: translateX(-50%);
         display: inline;
         bottom: 2rem;
-        font-size: 2.0em;
-        color: #FFCC99;
-        border: 1px solid #fff;
+        font-size: 40px;
         padding: 0.5rem 2rem;
-        background-color:rgba(11, 10, 12,0.7);
         margin-right:30px;
     }
 }
 
-.menu-icon{
-	color: white;
-	float: right;
-	font-size: 25px;
-	padding: 21px 0;
-	display: none;
-}
-
 /* header */
 
+.fa {
+  margin-right: 5px;
+}
+
+.header-right {
+  float: right;
+  margin-right: -25px;
+}
 
 
 
@@ -153,42 +149,5 @@ input {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
-  }
-}
-
-
-@media all and (max-width: 670px) {
-  .lesson {
-    width: 100%;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  .facebook {
-    margin-bottom: 10px;
-  }
-  
-  .top-wrapper {
-    text-align: left;
-  }
-
-  /* header-rightクラスのdisplayをnoneに指定してください */
-  .header-right{
-    display: none;
-  }
-  
-  /* menu-iconクラスのdisplayをblockに指定してください  */
-  .menu-icon{
-    display:block;
-  }
-  
-  .top-wrapper h1 {
-    font-size: 24px;
-  }
-
-  .top-wrapper p {
-    font-size: 14px;
   }
 }

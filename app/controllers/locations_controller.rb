@@ -1,6 +1,9 @@
 class LocationsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
+  def test
+  end
+
   def index
     @locations = Location.all.order(created_at: :desc)
     #@post = Post.all.order(created_at: :desc)

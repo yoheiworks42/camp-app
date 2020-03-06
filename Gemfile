@@ -17,6 +17,8 @@ gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '>= 4.9.4'
 gem 'fog-aws', '2.0.0'
 gem 'jquery-rails'
+gem 'font-awesome-sass', '~> 5.4.1'
+
 
 gem 'gmaps4rails'
 gem 'dotenv-rails'
