@@ -13,14 +13,14 @@
 		<div class="collapse navbar-collapse navbar-right" id="navbarHeader">
 			<ul class="nav navbar-nav">
 				<li><%=link_to "キャンプ場","/index"%></li>
-  	 <li><%=link_to "地図","#"%></li>
-  	 <% if logged_in? %>
-    	<li><%=link_to current_user.name,current_user%></li>
-    	<li><%=link_to "ログアウト",logout_path, method: :delete%></li>
-    <% else %>
-    	<li><%=link_to "新規登録","/signup"%></li>
-		<a class="btn btn-default navbar-btn main_link_btn" href="/login">ログイン</a>
-    <% end %>
+  	 			<li><%=link_to "地図","#"%></li>
+  	 			<% if logged_in? %>
+    				<li><%=link_to current_user.name,current_user%></li>
+    				<li><%=link_to "ログアウト",logout_path, method: :delete%></li>
+    			<% else %>
+    				<li><%=link_to "新規登録","/signup"%></li>
+					<a class="btn btn-default navbar-btn main_link_btn" href="/login">ログイン</a>
+   				 <% end %>
 			</ul>
 		</div>
 	</div>

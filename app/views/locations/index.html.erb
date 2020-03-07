@@ -1,8 +1,17 @@
 <div class="center">
     <%= image_tag @post.post_img %> 
     <h1>キャンプ場一覧</h1>
-    <p><%=link_to "キャンプ場を追加する","/sugest"%></p>
-       
+    <form class="navbar-form" role="search">
+      <div class="#">
+		<div class="form-group  serch_console">
+			<input type="text" class="form-control" placeholder="キャンプ場か県名は？">
+		</div>
+		<button type="submit" class="btn btn-default">検索</button>
+      </div>
+	</form>
+	<% if logged_in? %>
+        <p><%=link_to "キャンプ場を追加する","/sugest"%></p>
+    <% end %>
     <% @locations.each do |location| %>
         <%=link_to location.name,"/locations/#{location.id}"%></br>
 

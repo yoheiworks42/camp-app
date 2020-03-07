@@ -1,77 +1,95 @@
 
 <h1 class="center">キャンプ場を追加する</h1>
-
-<div class="row"> <!--rowとcol~はbootstrapの一部-->
+    <div id='map' class="center-block"></div>
+    <input id="address" type="text" class="form-control form center-block" placeholder="キャンプ場は？">
+    <button class="center-block" type="submit" onclick="EncodeAddress()">検索</button>
+    <div id="info" class="center"></div>
+<div class="row">
     <div class="col-md-6 col-md-offset-3">
         <%= form_for(@location) do |f| %>
 
             <%=f.label :name,"キャンプ場名称" %>
-            <%=f.text_field :name, class: 'form-control' %>
+            <%=f.text_field :name, id: "name", class: 'form-control'%>
             
             <%=f.label :postcode,"郵便番号"%>
-            <%=f.text_field :postcode, class: 'form-control'%>
+            <%=f.text_field :postcode, id: "postcode",class: 'form-control'%>
             
             <%=f.label :address,"住所"%>
-            <%=f.text_field :address, class: 'form-control'%>
-            
+            <%=f.text_field :address, id: "address1", class: 'form-control'%>
+
             <br><%=f.submit "登録する", class: "btn btn-primary"%>
         <%end%>
     </div>
 </div>
 
 
-<!-- 地名入力用のinputを追加 -->
-<input id="address" type="textbox" value="Sydney, NSW",class: 'form-control'>
-
-<!-- buttonをクリックしたらcodeAddressを実行　-->
-<input type="button" value="検索" onclick="codeAddress()",class: 'form-control'>
-<div id='map'>
-</div>
-
-<style>
-#map{
-  height: 400px;
-}
-</style>
 
 <script>
-/*
-mapを関数の外で定義(codeAddressでも使うため)
-geocoderを用意
-*/
-
 let map
 let geocoder
-
+//Map出力
 function initMap(){
-  // geocoderを初期化
-  geocoder = new google.maps.Geocoder()
-
+  geocoder = new google.maps.Geocoder() // geocodingしたあとmapを移動
+    
   map = new google.maps.Map(document.getElementById('map'), {
-  center: {lat: -34.397, lng: 150.644},
+  center: {lat: 35.6804, lng: 139.769017},
   zoom: 8
   });
 }
+//位置検索・特定
+function EncodeAddress(){
+  let inputAddress = document.getElementById('address').value; //検索欄の入力値
+    geocoder.geocode({'address':inputAddress},function(results, status){ //geocodingしたらmapを移動
+        if(status=='OK'){
+            //地図移動
+          map.setCenter(results[0].geometry.location);
+          //マーカーの生成
+          var marker = new google.maps.Marker({
+          	position: results[0].geometry.location,
+          	map: map,
+          	title: results[0].formatted_address,
+          	animation: google.maps.Animation.DROP
+        });
+        
+        //住所情報の取得
+        var address = results[0].formatted_address;
+        var location_name = results[0].address_components[0].long_name;
+        var postal_code = results[0].address_components[7].long_name;
+        var pref = results[0].address_components[5].long_name;
+        var sector1 = results[0].address_components[4].long_name;
+        var sector2 = results[0].address_components[3].long_name;
+        var number1 = results[0].address_components[2].long_name;
+        var number2 = results[0].address_components[1].long_name;
+        //document.getElementById("info").innerHTML = address;
+        document.getElementById("name").value = location_name;
+        document.getElementById("postcode").value = postal_code;
+        document.getElementById("address1").value = pref + sector1 + sector2 + number1 + number2;
 
-function codeAddress(){
-  // 入力を取得
-  let inputAddress = document.getElementById('address').value;
-
-  // geocodingしたあとmapを移動
-  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-    if (status == 'OK') {
-　　　// map.setCenterで地図が移動
-      map.setCenter(results[0].geometry.location);
-
-　　　// google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
+        //情報ウィンドウの生成
+        var infoWindow = new google.maps.InfoWindow({
+          content:  results[0].formatted_address,
+          pixelOffset: new google.maps.Size(0, 5)
+        });
+ 
+        //マーカーにリスナーを設定
+        marker.addListener('click', function(){
+          infoWindow.open(map, marker);
+        });
+        
+        //情報ウィンドウリスナーを設定
+        infoWindow.addListener('closeclick', function(){
+          marker.setMap(null);  //マーカーを削除
+        });
+        
+      }else if(status === 'ZERO_RESULTS') {
+        alert('不明なアドレスです： ' + status);
+        return;
+      }else{
+        alert('失敗しました： ' + status);
+        return;
+      }
+    });
 }
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCf2NmqqxXxG-saIu65YG89aMshhkkT1EA&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>

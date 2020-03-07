@@ -5,7 +5,7 @@
 
 /* universal *//*.を付けないと全ページ共通ってことか*/
 body {
-  padding-top: 200px;
+  padding-top: 60px;
 }
 
 .center {
@@ -13,6 +13,20 @@ body {
 }
 .right{
   text-align:right;
+}
+
+.flex{
+  display:flex;
+  margin:auto;
+}
+
+.serch_console{
+  padding-top:25px;
+}
+
+.form{
+  position: relative;
+	width: 20%;
 }
 
 
@@ -150,4 +164,10 @@ input {
     margin-right: 10px;
     margin-top: 5px;
   }
+}
+
+/*maps*/
+#map{
+  height:400px;
+  width:600px;
 }
