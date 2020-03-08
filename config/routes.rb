@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post "/login",to:'sessions#create'
   delete "/logout",to:'sessions#destroy'
 
-  resources :users #これどういう意味？
+  resources :users
 
   get "/index",to:'locations#index'
   get "/detail",to:'locations#show'

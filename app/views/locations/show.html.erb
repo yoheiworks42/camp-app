@@ -1,6 +1,7 @@
 <div class="center">
     <h1><%= @location.name%></h1>
     <p>〒：<%= @location.postcode %></p>
+    <p><%= @location.prefecture %></p>
     <p><%= @location.address%></p>
     <!--地図API--><div id='map'>
     <%=link_to "写真を投稿する","/locations/#{@location[:id]}/post"%>

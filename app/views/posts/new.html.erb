@@ -1,31 +1,10 @@
 <div class="center">
     <h1>写真を投稿する</h1>
     <%= form_for(@post) do |f| %>
-            <%=f.file_field :post_img, multiple: true, id: :post_img,class: 'form-control'%><br>
-            <%= image_tag @post.post_img.url, id: :img_prev if @post.post_img? %>
-            <!--% if @post.post_img.present? %-->
-              <!--%= image_tag @post.post_img.url, id: :img_prev %-->
-            <!--% else %-->
-              <!--p>画像が選択されていません</p-->
-            <!--% end %-->
+        <span class="picture">
+            <%=f.file_field :post_img, class: 'form-control'%><br>
+        </span>
             <%=f.hidden_field :location_id, value:current_page_id, class: 'form-control'%>
             <%=f.submit "投稿", class: "btn btn-primary"%>
     <%end%>
 </div>
-
-<script type="text/javascript">
-    $(function() {
-     function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $('#img_prev').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-      }
-     }
-     $("#post_img").change(function(){
-       readURL(this);
-     });
-    });
-</script>

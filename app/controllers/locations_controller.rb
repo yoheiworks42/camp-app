@@ -2,12 +2,13 @@ class LocationsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def test
+    @locations = Location.all.order(updated_at: :desc)
+    @posts = Post.where(location_id: num).order(updated_at: :desc).limit(1)
+    @posts = Post.order(updated_at: :desc).limit(1)
   end
 
   def index
     @locations = Location.all.order(created_at: :desc)
-    #@post = Post.all.order(created_at: :desc)
-    @post = Post.find_by(location_id: 2)
   end
 
   def show
@@ -46,7 +47,7 @@ class LocationsController < ApplicationController
   private
   
   def location_params #どういう機能だ？
-    params.require(:location).permit(:name, :postcode, :address)
+    params.require(:location).permit(:name, :postcode, :prefecture,:address)
   end
 
 end
