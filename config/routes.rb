@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get "/detail",to:'locations#show'
   get "/sugest",to:'locations#new'
   post "/sugest",to:'locations#create'
-  
+
   resources :locations
 
   get "/postindex",to:'posts#index' #あくまでバグの確認用

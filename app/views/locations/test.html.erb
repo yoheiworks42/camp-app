@@ -1,8 +1,7 @@
-<div class="center">
 <% @locations.each do |location| %>
-  <% @posts.each do |post| %>
-    <%= image_tag post.post_img.url if post.post_img?%></br>
-  <% end %>
-  <%= location.name%>
+	<% @posts.each do |post| %>
+		<%=image_tag post.post_img%>
+	<% end %>
+    <%= location.prefecture %>:
+    <%=link_to location.name,"/locations/#{location.id}"%></br>
 <% end %>
-<div>

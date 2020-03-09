@@ -2,13 +2,11 @@ class LocationsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def test
-    @locations = Location.all.order(updated_at: :desc)
-    @posts = Post.where(location_id: num).order(updated_at: :desc).limit(1)
-    @posts = Post.order(updated_at: :desc).limit(1)
   end
 
   def index
     @locations = Location.all.order(created_at: :desc)
+    @locations = Location.search(params[:search])
   end
 
   def show
@@ -35,6 +33,11 @@ class LocationsController < ApplicationController
   def home
   end
   
+  def search
+    #Viewのformで取得したパラメータをモデルに渡す
+    @locations = Location.search(params[:search])
+  end
+  
   # beforeアクション
   #ユーザーがログイン済みかどうか
   def logged_in_user
@@ -47,7 +50,7 @@ class LocationsController < ApplicationController
   private
   
   def location_params #どういう機能だ？
-    params.require(:location).permit(:name, :postcode, :prefecture,:address)
+    params.require(:location).permit(:name, :postcode, :prefecture,:address, :top_img)
   end
 
 end
