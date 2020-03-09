@@ -4,29 +4,7 @@
     <button class="center-block" type="submit" onclick="EncodeAddress()">検索</button>
     <div id="info" class="center"></div>
     
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <%= form_for(@location) do |f| %>
-
-            <%=f.label :name,"キャンプ場名称" %>
-            <%=f.text_field :name, id: "name", class: 'form-control'%>
-            
-            <%=f.label :postcode,"郵便番号"%>
-            <%=f.text_field :postcode, id: "postcode",class: 'form-control'%>
-
-            <%=f.label :prefecture,"県名"%>
-            <%=f.text_field :prefecture, id: "address1", class: 'form-control'%>
-            
-            <%=f.label :address,"住所"%>
-            <%=f.text_field :address, id: "address2", class: 'form-control'%>
-
-            <%=f.label :top_img,"写真"%>
-            <%=f.file_field :top_img, class: 'form-control'%>
-
-            <br><%=f.submit "登録する", class: "btn btn-primary"%>
-        <%end%>
-    </div>
-</div>
+<%= render "locations/form" %>
 
 
 
