@@ -7,7 +7,7 @@ function initMap(){
     
   map = new google.maps.Map(document.getElementById('map'), {
   center: {lat: 35.6804, lng: 139.769017},
-  zoom: 8
+  zoom: 15
   });
 }
 //位置検索・特定
