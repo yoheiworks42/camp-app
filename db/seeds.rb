@@ -1,10 +1,11 @@
-User.create!(name: "Example User",
-        email:"example_user@example.com",
+User.create!(name: "user1",
+        email:"user1@example.com",
         password: "password",
         password_confirmation: "password",
-        admin: true)
+        message: "camp-appを使っているよ！")
        
-Loaction.create!(name: "氷川キャンプ場",
-        postcode:"198-0212",
-        address:"東京都西多摩郡奥多摩町氷川７０２"
+Location.create!(name: "森と星空のキャンプヴィレッジ",
+        postcode:"321-3533",
+        prefecture:"栃木県",
+        address:"芳賀郡茂木町大字桧山120-1"
         )
