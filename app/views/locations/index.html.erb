@@ -14,8 +14,14 @@
         <p><%=link_to "キャンプ場を追加する","/sugest"%></p>
     <% end %>
     <% @locations.each do |location| %>
-        <%= image_tag location.top_img if location.top_img? %></br>
+     <%= link_to location.top_img.url,"data-lightbox"=>location.top_img.url do %>
+        <%= image_tag location.top_img.url if location.top_img? %></br>
+     <%end%>
         <%= location.prefecture %>:
         <%=link_to location.name,"/locations/#{location.id}"%></br>
     <% end %>
 </div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>

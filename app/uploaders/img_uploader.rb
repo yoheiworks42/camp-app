@@ -17,7 +17,8 @@ class ImgUploader < CarrierWave::Uploader::Base
 
 
 #上限変更　showでプレビューされるサイズ
-  process resize_to_limit: [600, 400]
+  process resize_to_limit: [600, 420]
+
 
 #サムネイルを生成
   version :thumb do
