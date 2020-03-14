@@ -14,8 +14,9 @@
             <%=f.label :address,"住所"%>
             <%=f.text_field :address, id: "address2", class: 'form-control'%>
 
-            <%=f.label :top_img,"写真"%>
-            <%=f.file_field :top_img, class: 'form-control'%>
+            <%=f.label :top_img,"写真"%></br>
+            <img @location.top_img, id="img_prev", class="slim200" if @location.top_img>
+            <%=f.file_field :top_img, id:"myfile", class: 'form-control'%>
             <br><%=f.submit "登録する", class: "btn btn-primary"%>
         <%end%>
     </div>
