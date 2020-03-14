@@ -17,12 +17,11 @@ class ImgUploader < CarrierWave::Uploader::Base
 
 
 #上限変更　showでプレビューされるサイズ
-  process resize_to_limit: [300, 200]
-  
+  process resize_to_limit: [600, 400]
 
 #サムネイルを生成
   version :thumb do
-    process :resize_to_limit => [300, 300]
+    process :resize_to_limit => [300, 200]
   end
 
 
