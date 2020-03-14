@@ -7,5 +7,9 @@
         <%= image_tag @user.img.url if @user.img? %>
     </p>
     <p><%= @user.message%></p>
-    <%= link_to "編集", "/users/#{@user[:id]}/edit"%>
+    <p><%= link_to "編集", "/users/#{@user[:id]}/edit"%></p>
+    <p><%= @user.name%>が投稿した写真</p>
+    <% @user.posts.each do |post| %>
+        <%= image_tag post.post_img.url if post.post_img? %>
+    <% end %>
 </div>
