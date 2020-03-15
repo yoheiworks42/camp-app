@@ -8,12 +8,12 @@
     <p><%= @location.prefecture %></p>
     <p><%= @location.address%></p>
     <!--地図API--><!--div id='map'-->
-    <%=link_to "写真を投稿する","/locations/#{@location[:id]}/post"%>
+    <a class="btn btn-default navbar-btn main_link_btn fa fa-camera" href=/locations/@location[:id]/post>投稿</a>
     <h3>投稿画像一覧</h3>
 
     <% @location.posts.each do |post| %>
         <%=link_to post.post_img.url,"data-lightbox"=>post.post_img.url do %>
-            <%=image_tag post.post_img.url if post.post_img?%>
+            <%=image_tag post.post_img.url,style:"width:300px;" if post.post_img?%>
         <%end%>
     <% end %>
 </div>

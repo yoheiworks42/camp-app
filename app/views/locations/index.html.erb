@@ -1,27 +1,29 @@
-<div class="center">
-    <h1>キャンプ場一覧</h1>
-    <form class="navbar-form" role="search">
-      <div class="row">
-       <div class="col-md-6 col-md-offset-3">
-        <!--%= form_tag(search_path,:method => 'get') do %-->
+<div class="container">
+  <div class="center">
+   <div class="inline_block_location">
+    <a class="btn btn-default navbar-btn main_link_btn fa fa-upload" href=/sugest>追加</a>
+   </div>
+     <div class="inline_block_location">
+      <form class="navbar-form" role="search" name="enter_search">
           <%= text_field_tag :search,"",class: 'form-control',placeholder: "どこへ行きますか？"%>
-          <%= submit_tag '検索', :name => nil ,class: "btn btn-primary"%>
-        <!--% end %-->
+	     </form>
+	 </div>
+  </div>
+    <h3>キャンプ場一覧</h3>
+    <% @locations.each do |location| %>
+     <div class="row info_index">
+      <aside class="col-md-4 ">
+       <div class="inline_block_location">
+        <%=link_to image_tag(location.top_img.url ,size:"150x100"),"/locations/#{location.id}" if location.top_img? %></br>
+       </div>
+      </aside>
+      <div class="col-md-8 left">
+       <div class="inline_block_location">
+        <h4><%= location.prefecture %></h4>
+        <h4><%=link_to location.name,"/locations/#{location.id}"%></h4></br>
        </div>
       </div>
-	</form>
-	<% if logged_in? %>
-        <p><%=link_to "キャンプ場を追加する","/sugest"%></p>
+     </div>
     <% end %>
-    <% @locations.each do |location| %>
-     <%= link_to location.top_img.url,"data-lightbox"=>location.top_img.url do %>
-        <%= image_tag location.top_img.url if location.top_img? %></br>
-     <%end%>
-        <%= location.prefecture %>:
-        <%=link_to location.name,"/locations/#{location.id}"%></br>
-    <% end %>
+  </div>
 </div>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>

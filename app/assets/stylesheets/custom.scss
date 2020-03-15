@@ -5,14 +5,20 @@
 
 /* universal *//*.を付けないと全ページ共通ってことか*/
 body {
-  padding-top: 60px;
+    color: #002222;
+    #background-color: papayawhip;
+    text-align: center;
+    padding-top: 60px;
 }
-
 .center {
   text-align:center;
 }
 .right{
   text-align:right;
+}
+
+.left{
+  text-align:left;
 }
 
 .flex{
@@ -37,10 +43,16 @@ body {
 
 
 /*location_page*/
-.location_index{
-  width:600px;
-  height:400px;
+.info_index{
+  padding-top: 3rem;
 }
+
+.inline_block_location{
+  display: inline-block;
+  padding-left:10px;
+  vertical-align:middle;
+}
+
 
 /* toppage　*/
 
@@ -182,4 +194,30 @@ input {
 #map{
   height:400px;
   width:600px;
+}
+
+/*weather*/
+
+
+/*
+img{
+    width: 300px;
+}
+*/
+
+.container{
+    padding-left: 20%;
+    padding-right: 20%;
+}
+input {
+    margin: 2%;
+}
+
+#submit{
+    margin-left: 10px;
+}
+
+.bold{
+    font-weight: bold;
+    font-size: 1.5em;
 }

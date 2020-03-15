@@ -7,18 +7,38 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/">Home</a>
+			<a class="navbar-brand" href="/"><i class="fa fa-home">Home</i></a>
 		</div>
 		
 		<div class="collapse navbar-collapse navbar-right" id="navbarHeader">
 			<ul class="nav navbar-nav">
-				<li><%=link_to "キャンプ場","/index"%></li>
-  	 			<li><%=link_to "地図","#"%></li>
+				<li>
+					<%=link_to ("/index") do%>
+						<i class="fa fa-list-ul">キャンプ場</i>
+					<%end%>
+				</li>
+  	 			<li>
+  	 				<%=link_to ("#") do%>
+  	 					<i class="fa fa-map-marker">地図</i>
+  	 				<%end%>
+  	 			</li>
   	 			<% if logged_in? %>
-    				<li><%=link_to current_user.name,current_user%></li>
-    				<li><%=link_to "ログアウト",logout_path, method: :delete%></li>
+    				<li>
+    					<%=link_to current_user do%>
+    						<i class="fa fa-user"><%=current_user.name%></i>
+    					<%end%>
+    				</li>
+    				<li>
+    					<%=link_to logout_path, method: :delete do %>
+    						<i class="fa fa-sign-out">ログアウト</i>
+    					<%end%>
+    				</li>
     			<% else %>
-    				<li><%=link_to "新規登録","/signup"%></li>
+    				<li>
+    					<%=link_to ("/signup") do%>
+    						<i class="fa fa-sign-in">新規登録</i>
+    					<%end%>
+    				</li>
 					<a class="btn btn-default navbar-btn main_link_btn" href="/login">ログイン</a>
    				 <% end %>
 			</ul>

@@ -11,7 +11,7 @@
     <p><%= @user.name%>が投稿した写真</p>
     <% @user.posts.each do |post| %>
      <%= link_to post.post_img.url,"data-lightbox"=>post.post_img.url do %>
-        <%= image_tag post.post_img.url if post.post_img? %>
+        <%= image_tag post.post_img.url,style:"width:300px;" if post.post_img? %>
      <% end %>
     <% end %>
 </div>
