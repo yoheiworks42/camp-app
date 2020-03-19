@@ -4,6 +4,10 @@ class LocationsController < ApplicationController
   def test
     #@location = Location.find(params[:id])
   end
+  
+  def map
+    @locations = Location.all
+  end
 
   def index
     @locations = Location.all.order(created_at: :desc)
