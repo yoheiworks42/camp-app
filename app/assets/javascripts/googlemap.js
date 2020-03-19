@@ -1,12 +1,10 @@
-
 let map
 let geocoder
 //Map出力
 function initMap(){
   geocoder = new google.maps.Geocoder() // geocodingしたあとmapを移動
-    
   map = new google.maps.Map(document.getElementById('map'), {
-  center: {lat: 35.6804, lng: 139.769017},
+  center: new google.maps.LatLng(35.6804,139.769017),
   zoom: 15
   });
 }
@@ -26,20 +24,18 @@ function EncodeAddress(){
         });
         
         //住所情報の取得
-        var address = results[0].formatted_address;
-        var location_name = results[0].address_components[0].long_name;
-        var postal_code = results[0].address_components[7].long_name;
-        var pref = results[0].address_components[5].long_name;
         var sector1 = results[0].address_components[4].long_name;
         var sector2 = results[0].address_components[3].long_name;
         var number1 = results[0].address_components[2].long_name;
         var number2 = results[0].address_components[1].long_name;
-        document.getElementById("info").innerHTML = address;
-        document.getElementById("name").value = location_name;
-        document.getElementById("postcode").value = postal_code;
-        document.getElementById("address1").value = pref;
+        document.getElementById("geolat").value = results[0].geometry.location.lat();
+        document.getElementById("geolng").value = results[0].geometry.location.lng();
+        document.getElementById("info").innerHTML = results[0].formatted_address;
+        document.getElementById("name").value = results[0].address_components[0].long_name;
+        document.getElementById("postcode").value = results[0].address_components[7].long_name;
+        document.getElementById("address1").value = results[0].address_components[5].long_name;
         document.getElementById("address2").value = sector1 + sector2 + number1 + number2;
-
+        
         //情報ウィンドウの生成
         var infoWindow = new google.maps.InfoWindow({
           content:  results[0].formatted_address,

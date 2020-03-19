@@ -1,29 +1,32 @@
 <div class="container">
-  <div class="center">
-   <div class="inline_block_location">
-    <a class="btn btn-default navbar-btn main_link_btn fa fa-upload" href=/sugest>追加</a>
-   </div>
-     <div class="inline_block_location">
+ <div class="center">
+   <div class="panel panel-default">
+
+	   <div class="panel-body">
       <form class="navbar-form" role="search" name="enter_search">
           <%= text_field_tag :search,"",class: 'form-control',placeholder: "どこへ行きますか？"%>
 	     </form>
-	 </div>
-  </div>
-    <h3>キャンプ場一覧</h3>
-    <% @locations.each do |location| %>
-     <div class="row info_index">
-      <aside class="col-md-4 ">
-       <div class="inline_block_location">
-        <%=link_to image_tag(location.top_img.url ,size:"150x100"),"/locations/#{location.id}" if location.top_img? %></br>
-       </div>
-      </aside>
-      <div class="col-md-8 left">
-       <div class="inline_block_location">
-        <h4><%= location.prefecture %></h4>
-        <h4><%=link_to location.name,"/locations/#{location.id}"%></h4></br>
+	   </div>
+	   <div class="panel-footer">
+	     <a class="box btn btn-primary navbar-btn main_link_btn fa fa-upload " href=/sugest>キャンプ場を追加する</a>
+	   </div>
+   </div>
+ </div>
+  <div class="row">
+   <h3>キャンプ場一覧</h3>
+   <% @locations.each do |location| %>
+    <div class=" col-md-4">
+     <div class="thumbnail">
+      <div class="thumbnail_image">
+       <%=link_to image_tag(location.top_img.url),"/locations/#{location.id}" if location.top_img? %>
+        <div class="caption">
+         <b><%=location.name%></b>
+         <p>場所：<%=location.prefecture%></p>
+        </div>
        </div>
       </div>
      </div>
-    <% end %>
+    <%end%>
+   </div>
   </div>
 </div>

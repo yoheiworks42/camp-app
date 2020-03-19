@@ -5,7 +5,7 @@
             <%=f.label :name,"キャンプ場名称" %>
             <%=f.text_field :name, id: "name", class: 'form-control'%>
             
-            <%=f.label :postcode,"郵便番号"%>
+            <%=f.label :postcode,"郵便番号(123-4567)"%>
             <%=f.text_field :postcode, id: "postcode",class: 'form-control'%>
 
             <%=f.label :prefecture,"都道府県名"%>
@@ -13,6 +13,9 @@
             
             <%=f.label :address,"住所"%>
             <%=f.text_field :address, id: "address2", class: 'form-control'%>
+            
+            <%=f.text_field :geolat, id: "geolat", type:"hidden"%>
+            <%=f.text_field :geolng, id: "geolng", type:"hidden"%>
 
             <%=f.label :top_img,"写真"%></br>
             <img @location.top_img, id="img_prev", class="slim200" if @location.top_img>

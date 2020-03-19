@@ -2,12 +2,62 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 
-<div class="center">
-    <h1><%= @location.name%></h1>
-    <p>〒：<%= @location.postcode %></p>
-    <p><%= @location.prefecture %></p>
-    <p><%= @location.address%></p>
-    <!--地図API--><!--div id='map'-->
+<div class="container">
+ <div class="inline-block_location">
+  <div id="map" style="width:250px; height:250px;"></div>
+ </div>
+ <div class="inline-block_location">
+  <div class="table-responsive">
+   <table class="table table table-striped">
+    <h2 id="address"><%=@location.name%><h2>
+     <tbody>
+     <tr>
+      <th>郵便番号</th>
+      <td class="left"><%= @location.postcode %></td>
+     </tr>
+     <tr>
+      <th>都道府県</th>
+      <td class="left"><%= @location.prefecture %></td>
+     </tr>
+     <tr>
+      <th>住所</th>
+      <td class="left"><%= @location.address%></td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+ 
+ <div class="table-responsive">
+  <table class="table table-bordered">
+   <tbody>
+    <thead>
+     <th></th>
+     <th class="center">今日</th>
+     <th class="center"><%= Date.tomorrow.strftime('%m/%d') %></th>
+     <th class="center"><span id="fd"></span></th>
+    </thead>
+    <tr>
+     <th class="vc">天気<th>
+     <div class="center"><span id="tenkilogo" class="bold"></span></div>
+    </tr>
+    <tr>
+     <th>気温(℃)</th>
+     <td><span id="nowtemp" class="bold"></span></td>
+    </tr>
+    <tr>
+     <th>風向</th>
+     <td><span id="winddeg" class="bold"></span></td>
+    </tr>
+    <tr>
+     <th>風速(m/s)</th>
+     <td><span id="wind" class="bold"></span></td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+
+ <div>
     <a class="btn btn-default navbar-btn main_link_btn fa fa-camera" href=/locations/@location[:id]/post>投稿</a>
     <h3>投稿画像一覧</h3>
 
@@ -16,4 +66,112 @@
             <%=image_tag post.post_img.url,style:"width:300px;" if post.post_img?%>
         <%end%>
     <% end %>
+ </div>
 </div>
+
+<!--日付-->
+<script>
+ 
+var nowDate = new Date();
+//2日後の日付
+var i=2; // 例
+var futureDate = new Date(nowDate.getTime() + i*24*60*60*1000);
+
+document.getElementById("fd").innerHTML =  (futureDate.getMonth()+1) + "/" + futureDate.getDate();
+
+</script>
+
+<!--お天気API-->
+<script>
+$(function (){
+
+   var lat = <%= @location.geolat %>
+   var lng = <%= @location.geolng %>
+
+    //$.post("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lng+"&APPID=<%= ENV['OWM_API_KEY'] %>&lang=ja&units=metric",
+    $.post("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lng+"&APPID=<%= ENV['OWM_API_KEY'] %>&lang=ja&units=metric&cnt=3",
+
+    function(json){
+        $("#tenki").html(json.weather[0].description);
+        $("#nowtemp").html(Math.round(json.main.temp));
+        $("#winddeg").html(get_deg(json.wind.deg));
+        $("#wind").html(Math.round(json.wind.speed));
+        
+      //天気ロゴ
+      switch (json.weather[0].main){
+         case 'Clear':
+         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/01d.png' >");
+         break;
+         case 'Clouds':
+         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/04d.png' >");
+         break;
+         case 'Rain':
+         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/09d.png' >");
+         break;
+         case 'Snow':
+         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/13d.png' >");
+         break;
+         case 'Fog':
+         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+         break;
+         case 'Mist':
+         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/50n.png' >");
+         break;
+         case 'Haze':
+         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+         break;
+         default:
+         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/01n.png' >");
+      };
+        
+    });
+});
+
+
+//風向
+ var get_deg = function(deg) {
+  var r = '北';
+  if (deg>=11.25) r = '北北東';
+  if (deg>=33.75) r = '北東';
+  if (deg>=56.25) r = '東北東';
+  if (deg>=78.75) r = '東';
+  if (deg>=101.25) r = '東南東';
+  if (deg>=123.75) r = '南東';
+  if (deg>=146.25) r = '南南東';
+  if (deg>=168.75) r = '南';
+  if (deg>=191.25) r = '南南西';
+  if (deg>=213.75) r = '南西';
+  if (deg>=236.25) r = '西南西';
+  if (deg>=258.75) r = '西';
+  if (deg>=281.25) r = '西北西';
+  if (deg>=303.75) r = '北西';
+  if (deg>=326.25) r = '北北西';
+  return r+'の風';
+ };
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+
+<!--地図API-->
+<script>
+var lat = <%= @location.geolat %>
+var lng = <%= @location.geolng %>
+
+function initMap(){
+   geocoder = new google.maps.Geocoder()
+   var options = {
+      zoom:8,
+      center:{lat: lat,lng: lng}
+   }
+   
+   var map = new
+   google.maps.Map(document.getElementById("map"),options);
+   
+   var marker = new google.maps.Marker({
+      position:{lat: lat,lng: lng},
+      map: map
+   });
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>

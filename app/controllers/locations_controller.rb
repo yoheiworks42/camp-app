@@ -2,7 +2,6 @@ class LocationsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def test
-    #@location = Location.find(params[:id])
   end
 
   def index
@@ -50,8 +49,8 @@ class LocationsController < ApplicationController
   
   private
   
-  def location_params #どういう機能だ？
-    params.require(:location).permit(:name, :postcode, :prefecture,:address, :top_img)
+  def location_params
+    params.require(:location).permit(:name, :postcode, :prefecture,:address, :top_img, :geolat, :geolng)
   end
 
 end
