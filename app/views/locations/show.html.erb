@@ -27,31 +27,65 @@
    </table>
   </div>
  </div>
- 
+ <h3><span id="view_time"></span>の天気</h3>
  <div class="table-responsive">
   <table class="table table-bordered">
    <tbody>
-    <thead>
-     <th></th>
-     <th class="center">今日</th>
-     <th class="center"><%= Date.tomorrow.strftime('%m/%d') %></th>
-     <th class="center"><span id="fd"></span></th>
-    </thead>
+    <tr>
+     <th>時間(時)</th>
+     <th class="center"><span id="next3"></span></th>
+     <th class="center"><span id="next6"></span></th>
+     <th class="center"><span id="next9"></span></th>
+     <th class="center"><span id="next12"></span></th>
+     <th class="center"><span id="next15"></span></th>
+     <th class="center"><span id="next18"></span></th>
+     <th class="center"><span id="next21"></span></th>
+     <th class="center"><span id="next24"></span></th>
+    </tr>
     <tr>
      <th class="vc">天気<th>
-     <div class="center"><span id="tenkilogo" class="bold"></span></div>
+     <div class="center"><span id="tenkilogo0" class="bold"></span></div>
+     <td><div class="center"><span id="tenkilogo1" class="bold"></span></div></td>
+     <td><div class="center"><span id="tenkilogo2" class="bold"></span></div></td>
+     <td><div class="center"><span id="tenkilogo3" class="bold"></span></div></td>
+     <td><div class="center"><span id="tenkilogo4" class="bold"></span></div></td>
+     <td><div class="center"><span id="tenkilogo5" class="bold"></span></div></td>
+     <td><div class="center"><span id="tenkilogo6" class="bold"></span></div></td>
+     <td><div class="center"><span id="tenkilogo7" class="bold"></span></div></td>
     </tr>
     <tr>
      <th>気温(℃)</th>
-     <td><span id="nowtemp" class="bold"></span></td>
+     <td><span id="temp0" class="bold"></span></td>
+     <td><span id="temp1" class="bold"></span></td>
+     <td><span id="temp2" class="bold"></span></td>
+     <td><span id="temp3" class="bold"></span></td>
+     <td><span id="temp4" class="bold"></span></td>
+     <td><span id="temp5" class="bold"></span></td>
+     <td><span id="temp6" class="bold"></span></td>
+     <td><span id="temp7" class="bold"></span></td>
     </tr>
     <tr>
      <th>風向</th>
-     <td><span id="winddeg" class="bold"></span></td>
+     <td><span id="winddeg0" class="bold"></span></td>
+     <td><span id="winddeg1" class="bold"></span></td>
+     <td><span id="winddeg2" class="bold"></span></td>
+     <td><span id="winddeg3" class="bold"></span></td>
+     <td><span id="winddeg4" class="bold"></span></td>
+     <td><span id="winddeg5" class="bold"></span></td>
+     <td><span id="winddeg6" class="bold"></span></td>
+     <td><span id="winddeg7" class="bold"></span></td>
+     
     </tr>
     <tr>
      <th>風速(m/s)</th>
-     <td><span id="wind" class="bold"></span></td>
+     <td><span id="wind0" class="bold"></span></td>
+     <td><span id="wind1" class="bold"></span></td>
+     <td><span id="wind2" class="bold"></span></td>
+     <td><span id="wind3" class="bold"></span></td>
+     <td><span id="wind4" class="bold"></span></td>
+     <td><span id="wind5" class="bold"></span></td>
+     <td><span id="wind6" class="bold"></span></td>
+     <td><span id="wind7" class="bold"></span></td>
     </tr>
    </tbody>
   </table>
@@ -71,15 +105,29 @@
 
 <!--日付-->
 <script>
- 
-var nowDate = new Date();
-//2日後の日付
-var i=2; // 例
-var futureDate = new Date(nowDate.getTime() + i*24*60*60*1000);
+var now = new Date();
+const numbers=[3,6,9,12,15,18,21,24];
+numbers.forEach((i)=>
+{var next = new Date(now.getHours() + i*60*60*1000);
+document.getElementById("next"+i).innerHTML =  next.getHours();
+});
 
-document.getElementById("fd").innerHTML =  (futureDate.getMonth()+1) + "/" + futureDate.getDate();
+var mon=now.getMonth()+1;
+var day=now.getDate();
+document.getElementById("view_time").innerHTML= mon+"/"+day
 
-</script>
+var get_hour = function(hour){
+	if (0 <=hour <3) t = 3;
+	if (3 <=hour <6) t = 6;
+	if (6 <=hour <9) t = 9;
+	if (9 <=hour <12) t = 12;
+	if (12 <=hour <15) t = 15;
+	if (15 <=hour <18) t = 18;
+	if (18 <=hour <21) t = 21;
+	if (21 <=hour <24) t = 0;
+	return t;
+}
+ </script>
 
 <!--お天気API-->
 <script>
@@ -89,41 +137,43 @@ $(function (){
    var lng = <%= @location.geolng %>
 
     //$.post("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lng+"&APPID=<%= ENV['OWM_API_KEY'] %>&lang=ja&units=metric",
-    $.post("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lng+"&APPID=<%= ENV['OWM_API_KEY'] %>&lang=ja&units=metric&cnt=3",
+    $.post("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lng+"&APPID=<%= ENV['OWM_API_KEY'] %>&lang=ja&units=metric&cnt=8",
 
-    function(json){
-        $("#tenki").html(json.weather[0].description);
-        $("#nowtemp").html(Math.round(json.main.temp));
-        $("#winddeg").html(get_deg(json.wind.deg));
-        $("#wind").html(Math.round(json.wind.speed));
-        
+   function(json){
+	   for (let n=0; n<=7; n++) {
+        $("#tenki").html(json.list[n].weather[0].description);
+        $("#temp"+n).html(Math.round(json.list[n].main.temp));
+        $("#winddeg"+n).html(get_deg(json.list[n].wind.deg));
+        $("#wind"+n).html(Math.round(json.list[n].wind.speed));
+        //$("#time1").html(json.list[3].dt_txt);
+       
       //天気ロゴ
-      switch (json.weather[0].main){
+      switch (json.list[n].weather[0].main){
          case 'Clear':
-         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/01d.png' >");
+         $("#tenkilogo"+n).html("<img src='http://openweathermap.org/img/w/01d.png' >");
          break;
          case 'Clouds':
-         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/04d.png' >");
+         $("#tenkilogo"+n).html("<img src='http://openweathermap.org/img/w/04d.png' >");
          break;
          case 'Rain':
-         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/09d.png' >");
+         $("#tenkilogo"+n).html("<img src='http://openweathermap.org/img/w/09d.png' >");
          break;
          case 'Snow':
-         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/13d.png' >");
+         $("#tenkilogo"+n).html("<img src='http://openweathermap.org/img/w/13d.png' >");
          break;
          case 'Fog':
-         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+         $("#tenkilogo"+n).html("<img src='http://openweathermap.org/img/w/50d.png' >");
          break;
          case 'Mist':
-         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/50n.png' >");
+         $("#tenkilogo"+n).html("<img src='http://openweathermap.org/img/w/50n.png' >");
          break;
          case 'Haze':
-         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+         $("#tenkilogo"+n).html("<img src='http://openweathermap.org/img/w/50d.png' >");
          break;
          default:
-         $("#tenkilogo").html("<img src='http://openweathermap.org/img/w/01n.png' >");
+         $("#tenkilogo"+n).html("<img src='http://openweathermap.org/img/w/01n.png' >");
       };
-        
+     }  
     });
 });
 
@@ -146,8 +196,8 @@ $(function (){
   if (deg>=281.25) r = '西北西';
   if (deg>=303.75) r = '北西';
   if (deg>=326.25) r = '北北西';
-  return r+'の風';
- };
+  return r;
+ }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 

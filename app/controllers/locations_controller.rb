@@ -2,6 +2,7 @@ class LocationsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def test
+    @locations = Location.all
   end
   
   def map

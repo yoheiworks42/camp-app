@@ -1,0 +1,45 @@
+中略
+
+<!--マップ-->
+<div id="map"></div>
+
+<!-- js部分 -->
+<script>
+    function initMap() {
+
+      //初期表示位置
+      var latlng = new google.maps.LatLng(36.30, 139.5);
+
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 5,
+          center: latlng
+      });
+      var transitLayer = new google.maps.TransitLayer();
+      transitLayer.setMap(map);
+
+      //複数マーカー ここから
+      <% @locations.each do |location| %>
+      (function(){
+        var contentString = "住所：<%= location.name %>"; 
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+            position:{lat: <%= location.geolat %>, lng: <%= location.geolng %>},
+            map: map,
+            title: contentString, //お好みのアイコンが無ければ、左のカンマを削除
+            icon: 'お好みのアイコンのパス（ない場合はこの行と真上の行のカンマを削除）'
+        });
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker, content);
+        });
+       })();
+      <% end %>
+      //複数マーカー ここまで  
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>

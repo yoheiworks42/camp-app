@@ -1,8 +1,36 @@
-<div id="map"></div>
+<div class="container">
+ <h2 class="center">全国のキャンプ場</h2>
+ <div id="map" class="center-block" style="width:100%; height:500px;"></div>
+</div>
 
 <script>
- function(initMap){
-  <%=@locations.each do |location|%>
-   var marker = 
- }
+function initMap(){
+ var map = new google.maps.Map(document.getElementById("map"),{
+  zoom: 4.5,
+  center:{lat: 35.6804,lng: 139.769017}
+ });
+ <% @locations.each do |location|%>
+ /*infowindow付けると死ぬ
+   var infoWindow = new google.maps.InfoWindow({
+  	content: <%=location.name%>
+   });
+   marker.addListener('click',function(){
+  	infoWindow.open(map, marker, content);
+   });
+   infoWindow.addListener('closeclick',function(){
+  	marker.setMap(null);
+   });
+ */
+  (function(){
+   var marker = new google.maps.Marker({
+      position:{lat: <%= location.geolat %>,lng: <%= location.geolng %>},
+      map: map
+   });
+  })(); //()がマーカーを表示させる。。
+ <%end%>
+}
+
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
