@@ -1,10 +1,16 @@
-<h1 class="center">キャンプ場を追加する</h1>
-    <div id='map' class="center-block"></div>
-    <input id="address" type="text" class="form-control form center-block" placeholder="キャンプ場は？">
-    <button class="center-block" type="submit" onclick="EncodeAddress()">検索</button>
-    <div id="info" class="center"></div> <!--住所一括表記-->
-    
-<%= render "locations/form" %>
-
+<div class="container">
+ <div class="panel panel-default">
+  <div class="panel-body">
+   <h2 class="center"><b>キャンプ場を追加する</b></h2>
+   <div id='map' class="center-block"></div>
+   <input id="address" type="text" class="form-control form center-block" placeholder="キャンプ場は？">
+   <button class="center-block" type="submit" onclick="EncodeAddress()">検索</button>
+   <div id="info" class="center"></div> <!--住所一括表記-->
+  </div>
+  <div class="panel-footer">
+  <%= render "locations/form" %>
+  </div>
+ </div>
+</div>
 <!--消すべからず-->
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>

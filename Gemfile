@@ -18,7 +18,7 @@ gem 'mini_magick',             '>= 4.9.4'
 gem 'fog-aws', '2.0.0'
 gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.4.1'
-
+gem 'rspec-rails','~>3.7'
 
 gem 'gmaps4rails'
 gem 'dotenv-rails'

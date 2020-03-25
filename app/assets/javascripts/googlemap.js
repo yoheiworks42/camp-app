@@ -1,12 +1,32 @@
 let map
 let geocoder
+var currentMarker=null;
 //Map出力
 function initMap(){
   geocoder = new google.maps.Geocoder() // geocodingしたあとmapを移動
   map = new google.maps.Map(document.getElementById('map'), {
   center: new google.maps.LatLng(35.6804,139.769017),
-  zoom: 15
+  zoom: 15,
   });
+  
+  google.maps.event.addListener(map, 'click',function (event){
+    
+    var marker = new google.maps.Marker();
+    marker.setPosition(new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()));
+    map.setCenter(new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()));
+    marker.setMap(map);
+    document.getElementById("geolat").value=event.latLng.lat();
+    document.getElementById("geolng").value=event.latLng.lng();
+    
+    if(currentMarker){
+      currentMarker.setMap(null);
+    }
+    currentMarker=marker
+    
+  });
+  
+
+  
 }
 //位置検索・特定
 function EncodeAddress(){
@@ -28,7 +48,7 @@ function EncodeAddress(){
         var sector2 = results[0].address_components[3].long_name;
         var number1 = results[0].address_components[2].long_name;
         var number2 = results[0].address_components[1].long_name;
-        document.getElementById("geolat").value = results[0].geometry.location.lat();
+        document.getElementById("geolat").innerHTML = results[0].geometry.location.lat();
         document.getElementById("geolng").value = results[0].geometry.location.lng();
         document.getElementById("info").innerHTML = results[0].formatted_address;
         document.getElementById("name").value = results[0].address_components[0].long_name;
@@ -51,6 +71,11 @@ function EncodeAddress(){
         infoWindow.addListener('closeclick', function(){
           marker.setMap(null);  //マーカーを削除
         });
+        
+        if(currentMarker){
+          currentMarker.setMap(null);
+        }
+        currentMarker=marker;
         
       }else if(status === '検索できませんでした') {
         alert('不明なアドレスです： ' + status);

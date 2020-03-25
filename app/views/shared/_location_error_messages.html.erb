@@ -1,0 +1,9 @@
+<% if @location.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @location.errors.full_messages.each do |msg| %>
+      <%=msg%></br>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

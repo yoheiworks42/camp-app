@@ -1,45 +1,24 @@
-中略
+<p>■画像ファイルを選択してください。<br>
+<input type="file" accept='image/*' multiple="multiple" onchange="loadImage(this);"></p>
 
-<!--マップ-->
-<div id="map"></div>
+<p id="preview"></p>
 
-<!-- js部分 -->
+<style>
+#preview img {
+	width:100px;
+	border:1px solid #cccccc;
+}
+</style>
 <script>
-    function initMap() {
-
-      //初期表示位置
-      var latlng = new google.maps.LatLng(36.30, 139.5);
-
-
-      var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 5,
-          center: latlng
-      });
-      var transitLayer = new google.maps.TransitLayer();
-      transitLayer.setMap(map);
-
-      //複数マーカー ここから
-      <% @locations.each do |location| %>
-      (function(){
-        var contentString = "住所：<%= location.name %>"; 
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
-
-        var marker = new google.maps.Marker({
-            position:{lat: <%= location.geolat %>, lng: <%= location.geolng %>},
-            map: map,
-            title: contentString, //お好みのアイコンが無ければ、左のカンマを削除
-            icon: 'お好みのアイコンのパス（ない場合はこの行と真上の行のカンマを削除）'
-        });
-
-        marker.addListener('click', function() {
-          infowindow.open(map, marker, content);
-        });
-       })();
-      <% end %>
-      //複数マーカー ここまで  
+function loadImage(obj)
+{
+ document.getElementById('preview').innerHTML = '<p>プレビュー</p>';
+ for (i = 0; i < obj.files.length; i++) {
+  var fileReader = new FileReader();
+  fileReader.onload = (function (e) {
+	document.getElementById('preview').innerHTML += '<img src="' + e.target.result + '">';
+  });
+  fileReader.readAsDataURL(obj.files[i]);
   }
+}
 </script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>

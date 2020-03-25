@@ -1,26 +1,27 @@
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <%= form_for(@location) do |f| %>
+ <div class="col-md-6 col-md-offset-3">
+  <%= form_for(@location) do |f| %>
+    <%= render "shared/location_error_messages"%>
+   <%=f.label :name,"キャンプ場名称" %>
+   <%=f.text_field :name, id: "name", class: 'form-control'%>
+   
+   <%=f.label :postcode,"郵便番号(123-4567)"%>
+   <%=f.text_field :postcode, id: "postcode",class: 'form-control'%>
 
-            <%=f.label :name,"キャンプ場名称" %>
-            <%=f.text_field :name, id: "name", class: 'form-control'%>
-            
-            <%=f.label :postcode,"郵便番号(123-4567)"%>
-            <%=f.text_field :postcode, id: "postcode",class: 'form-control'%>
+   <%=f.label :prefecture,"都道府県名"%>
+   <%=f.text_field :prefecture, id: "address1", class: 'form-control'%>
+   
+   <%=f.label :address,"住所"%>
+   <%=f.text_field :address, id: "address2", class: 'form-control'%>
+   
+   <%=f.text_field :geolat, id: "geolat", type:"hidden"%>
+   <%=f.text_field :geolng, id: "geolng", type:"hidden"%>
 
-            <%=f.label :prefecture,"都道府県名"%>
-            <%=f.text_field :prefecture, id: "address1", class: 'form-control'%>
-            
-            <%=f.label :address,"住所"%>
-            <%=f.text_field :address, id: "address2", class: 'form-control'%>
-            
-            <%=f.text_field :geolat, id: "geolat", type:"hidden"%>
-            <%=f.text_field :geolng, id: "geolng", type:"hidden"%>
-
-            <%=f.label :top_img,"写真"%></br>
-            <img @location.top_img, id="img_prev", class="slim200" if @location.top_img>
-            <%=f.file_field :top_img, id:"myfile", class: 'form-control'%>
-            <br><%=f.submit "登録する", class: "btn btn-primary"%>
-        <%end%>
-    </div>
+   <%=f.label :top_img,"写真"%></br>
+   <img @location.top_img, id="img_prev", class="slim200" if @location.top_img>
+   <%=f.file_field :top_img, id:"myfile",accept:'image/*', class: 'form-control'%>
+   <br><%=f.submit "登録する", class: "btn btn-primary"%>
+  <%end%>
+ </div>
 </div>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>

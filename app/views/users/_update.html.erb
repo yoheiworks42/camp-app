@@ -13,12 +13,9 @@
             <%=f.label :password_confirmation,"確認用パスワード"%>
             <%=f.password_field :password_confirmation, class: 'form-control'%>
 
-            <%=f.label :message,"自己紹介メッセージ"%>
-            <%=f.text_field :message, class: 'form-control'%>
-
             <%=f.label :img,"プロフィールアイコン"%></br>
             <img @user.img.url, id="img_prev", class="slim200" if @user.img >
-            <%=f.file_field :img, id:"myfile", class: 'form-control'%>
+            <%=f.file_field :img, id:"myfile",accept:'image/*', class: 'form-control'%>
             
             <p><%= f.check_box :remove_img %>画像を削除する</p>
             

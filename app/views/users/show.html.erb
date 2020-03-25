@@ -1,19 +1,25 @@
-<% provide(:title, @user.name)%>
-<div class="center">
-    <h1>
-        <%= @user.name%>
-    </h1>
-    <p>
-        <%= image_tag @user.img.url if @user.img? %>
-    </p>
-    <p><%= @user.message%></p>
-    <p><%= link_to "編集", "/users/#{@user[:id]}/edit"%></p>
-    <p><%= @user.name%>が投稿した写真</p>
-    <% @user.posts.each do |post| %>
-     <%= link_to post.post_img.url,"data-lightbox"=>post.post_img.url do %>
-        <%= image_tag post.post_img.url,style:"width:300px;" if post.post_img? %>
-     <% end %>
-    <% end %>
+<div class="container">
+ <div class="center">
+  <h1>
+   <%= @user.name%>
+  </h1>
+  <p>
+   <%= image_tag @user.img.url if @user.img? %>
+  </p>
+  <a class="box btn btn-primary navbar-btn main_link_btn" href=/users/<%=@user.id%>/edit>ユーザー情報更新</a>
+  <p><%= @user.name%>が投稿した写真</p>
+  <% @user.posts.each do |post| %>
+   <div class=" col-md-4">
+    <div class="thumbnail">
+     <div class="thumbnail_image">
+      <%= link_to post.post_img.url,"data-lightbox"=>post.post_img.url do %>
+       <%= image_tag post.post_img.url,style:"width:300px;" if post.post_img? %>
+      <% end %>
+     </div>
+    </div>
+   </div>
+  <% end %>
+ </div>
 </div>
 
 
