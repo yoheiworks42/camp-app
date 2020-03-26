@@ -20,6 +20,14 @@ gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'rspec-rails','~>3.7'
 
+group :test do
+ gem 'capybara','~> 2.13'
+ gem 'factory_bot_rails','~>4.11'
+ gem 'selenium-webdriver'
+ #gem 'chromedriver-helper'
+end
+
+
 gem 'gmaps4rails'
 gem 'dotenv-rails'
 
