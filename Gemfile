@@ -21,7 +21,7 @@ gem 'font-awesome-sass', '~> 5.4.1'
 gem 'rspec-rails','~>3.7'
 
 group :test do
- gem 'capybara','~> 2.13'
+ gem 'capybara','~> 3.17.0'
  gem 'factory_bot_rails','~>4.11'
  gem 'selenium-webdriver'
  #gem 'chromedriver-helper'
@@ -33,7 +33,6 @@ gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
   gem 'sqlite3', '1.3.13'
 end
 

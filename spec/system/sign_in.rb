@@ -10,9 +10,9 @@ describe "ログインテスト",type: :system do
    visit login_path
    fill_in "メールアドレス", with: "email@example.com"
    fill_in "パスワード",with:"password"
-   click_button "ログインする"
+   click_button "ログイン"
   end
-  it"ユーザー画面が表示"do
+  it"ユーザー画面が表示される"do
    expect(page).to have_content "ユーザーA"
   end
  end
