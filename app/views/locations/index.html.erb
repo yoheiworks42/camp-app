@@ -19,7 +19,9 @@
       <div class="thumbnail_image">
        <%=link_to image_tag(location.top_img.url),"/locations/#{location.id}" if location.top_img? %>
         <div class="caption">
-         <b><%=location.name%></b>
+         <div class="text_link">
+          <%=link_to location.name,"/locations/#{location.id}", {class: "text_link"}%>
+         </div>
          <p>場所：<%=location.prefecture%></p>
         </div>
        </div>

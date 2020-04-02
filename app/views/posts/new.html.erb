@@ -1,15 +1,17 @@
 <div class="container">
- <div class="center">
-  <h2><b>写真を投稿する</b></h2>
-  <div class="wakusen1">
-  <p>プレビュー</p>
-  <%= form_for(@post) do |f| %>
-   <img @post.post_img, id="img_prev", class="slim200" if @post.post_img>
-   <%=f.file_field :post_img,  id: "myfile",class: 'form-control file_form main_link_btn',accept:'image/*'%><br>
-   <%=f.text_field :micropost, class:"form-control",placeholder:"コメントを30文字以内で入力してください"%>
-   <%=f.hidden_field :location_id, value:current_page_id, class: 'form-control'%>
-   <%=f.submit "投稿", class: "box btn btn-primary navbar-btn main_link_btn"%>
-  <%end%>
-  </div>
+ <div class="panel panel-default">
+   <div class="center">
+    <h2><b>写真を投稿する</b></h2>
+     <div class="panel-body">
+     <p>プレビュー</p>
+     <%= form_for(@post) do |f| %>
+      <%= render "shared/error_messages",object: f.object%>
+      <img @post.post_img, id="img_prev", class="slim200" if @post.post_img>
+       <%=f.file_field :post_img,  id: "myfile",class: 'form-control file_form main_link_btn',accept:'image/*'%><br>
+       <%=f.hidden_field :location_id, value:current_page_id, class: 'form-control'%>
+       <%=f.submit "投稿", class: "box btn btn-primary navbar-btn main_link_btn"%>
+      <%end%>
+     </div>
+   </div>
  </div>
 </div>

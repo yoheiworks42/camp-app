@@ -16,6 +16,7 @@ class PostsController < ApplicationController
    redirect_to "/locations/#{@post.location_id}"
   else
    flash[:danger]="投稿に失敗しました"
+   #redirect_to "/locations/#{@post.location_id}/post"
    render "new"
   end
  end
@@ -32,7 +33,7 @@ class PostsController < ApplicationController
  
  def post_params
   params.require(:post).permit(
-   :location_id, :post_img, :micropost
+   :location_id, :post_img
   )
  end
 end

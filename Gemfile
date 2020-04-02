@@ -19,6 +19,7 @@ gem 'fog-aws', '2.0.0'
 gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'rspec-rails','~>3.7'
+gem 'rails-i18n'
 
 group :test do
  gem 'capybara','~> 3.17.0'
