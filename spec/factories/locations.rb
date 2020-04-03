@@ -1,5 +1,6 @@
 FactoryBot.define do
 factory :location do
+  id {"1"}
   name {"同士の森キャンプ場"}
   postcode {"111-2222"}
   prefecture {"山梨県"}
