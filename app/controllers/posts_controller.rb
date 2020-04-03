@@ -16,8 +16,8 @@ class PostsController < ApplicationController
    redirect_to "/locations/#{@post.location_id}"
   else
    flash[:danger]="投稿に失敗しました"
-   #redirect_to "/locations/#{@post.location_id}/post"
-   render "new"
+   redirect_to "/locations/#{@post.location_id}/post",flash:{error: @post.errors.full_messages}
+   #render "new"
   end
  end
  

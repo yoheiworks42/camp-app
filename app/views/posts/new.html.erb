@@ -5,7 +5,13 @@
      <div class="panel-body">
      <p>プレビュー</p>
      <%= form_for(@post) do |f| %>
-      <%= render "shared/error_messages",object: f.object%>
+       <% if flash[:error].present? %>
+        <div id="error_explanation">
+         <% flash[:error].each do |msg| %>
+          <%= msg %>
+         <% end %>
+        </div>
+       <% end %>
       <img @post.post_img, id="img_prev", class="slim200" if @post.post_img>
        <%=f.file_field :post_img,  id: "myfile",class: 'form-control file_form main_link_btn',accept:'image/*'%><br>
        <%=f.hidden_field :location_id, value:current_page_id, class: 'form-control'%>
