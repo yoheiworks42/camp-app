@@ -16,7 +16,8 @@ class PostsController < ApplicationController
    redirect_to "/locations/#{@post.location_id}"
   else
    flash[:danger]="投稿に失敗しました"
-   render "new"
+   redirect_to "/locations/#{@post.location_id}/post",flash:{error: @post.errors.full_messages}
+   #render "new"
   end
  end
  
@@ -24,7 +25,7 @@ class PostsController < ApplicationController
  def logged_in_user
   unless logged_in?
    flash[:danger]="ログインしてください"
-   redirect_to "login_url"
+   redirect_to login_url
   end
  end
  
@@ -32,7 +33,7 @@ class PostsController < ApplicationController
  
  def post_params
   params.require(:post).permit(
-   :location_id, :post_img, :micropost
+   :location_id, :post_img
   )
  end
 end

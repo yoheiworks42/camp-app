@@ -4,6 +4,7 @@
 </div>
 
 <script>
+var currentInfoWindow=null;
 function initMap(){
  var map = new google.maps.Map(document.getElementById("map"),{
   zoom: 4.5,
@@ -16,13 +17,19 @@ function initMap(){
       position:{lat: <%= location.geolat %>,lng: <%= location.geolng %>},
       map: map
    });
+   
    var infoWindow = new google.maps.InfoWindow({
    content:
-   "<div><img src=<%=location.top_img.thumb.url%>></div><a href=/locations/<%=location.id%>><%=location.name%></a>"
+   "<div><a href=/locations/<%=location.id%>><img src=<%=location.top_img.thumb.url%>></a></div><a href=/locations/<%=location.id%> class=text_link><%=location.name%></a>"
    });
    
-   	marker.addListener('click',function(){
+   marker.addListener('click',function(){
     infoWindow.open(map, marker);
+
+     if(currentInfoWindow){
+	     currentInfoWindow.setMap(null);
+     }
+     currentInfoWindow=infoWindow;
    });
 
    infoWindow.addListener('closeclick',function(){
@@ -30,7 +37,7 @@ function initMap(){
    });
   })(); //()がマーカーを表示させる。。
  <%end%>
- 
+
 }
 
 </script>

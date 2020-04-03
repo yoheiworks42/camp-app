@@ -4,7 +4,7 @@
    <%= @user.name%>
   </h1>
   <p>
-   <%= image_tag @user.img.url if @user.img? %>
+   <%= image_tag @user.img.thumb.url if @user.img? %>
   </p>
   <a class="box btn btn-primary navbar-btn main_link_btn" href=/users/<%=@user.id%>/edit>ユーザー情報更新</a>
   <p><%= @user.name%>が投稿した写真</p>

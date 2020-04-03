@@ -8,7 +8,7 @@ function initMap(){
   center: new google.maps.LatLng(35.6804,139.769017),
   zoom: 15,
   });
-  
+//マーカーはつねに一つだけ表示  
   google.maps.event.addListener(map, 'click',function (event){
     
     var marker = new google.maps.Marker();
@@ -36,11 +36,13 @@ function EncodeAddress(){
             //地図移動
           map.setCenter(results[0].geometry.location);
           //マーカーの生成
+          
           var marker = new google.maps.Marker({
           	position: results[0].geometry.location,
           	map: map,
           	title: results[0].formatted_address,
           	animation: google.maps.Animation.DROP
+          	
         });
         
         //住所情報の取得
@@ -48,7 +50,7 @@ function EncodeAddress(){
         var sector2 = results[0].address_components[3].long_name;
         var number1 = results[0].address_components[2].long_name;
         var number2 = results[0].address_components[1].long_name;
-        document.getElementById("geolat").innerHTML = results[0].geometry.location.lat();
+        document.getElementById("geolat").value = results[0].geometry.location.lat();
         document.getElementById("geolng").value = results[0].geometry.location.lng();
         document.getElementById("info").innerHTML = results[0].formatted_address;
         document.getElementById("name").value = results[0].address_components[0].long_name;

@@ -13,7 +13,7 @@ class User < ApplicationRecord
    #validates   :img_size　#投稿は5MB以下に。
  
  private
- 
+
  def img_size
   if img.size > 5.megabytes
    errors.add(:img, "5MB以下にしてください")
