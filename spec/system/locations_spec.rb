@@ -30,6 +30,7 @@ describe "Location", type: :system do
   it"詳細が表示される"do
    expect(page).to have_content
   end
+  
  describe "Search"do
   before do
    location=FactoryBot.create( :location, name:"キャンプ場A",prefecture:"北海道")

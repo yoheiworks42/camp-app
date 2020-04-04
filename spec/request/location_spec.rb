@@ -6,23 +6,25 @@ RSpec.describe"Location", type: :request do
    FactoryBot.create(:location, id:"1")
   end
   
-  it"indexページのリクエストは正しいか"do
-   get index_path
-   expect(response.status).to eq(200)
+  it"indexページが表示されること"do
+   get index_url
+   expect(response.body).to include "キャンプ場一覧"
   end
   
-  it"追加ページのリクエストは正しいか"do
-   get locations_path
-   expect(response.status).to eq(200)
+  it"追加ページが表示されること"do
+   get locations_url
+   expect(response.body).to include "キャンプ場を追加する"
   end
   
-  it"詳細ページのリクエストは正しいか"do
-   get locations_id_path
-   expect(response.status).to eq(200)
- end
- 
-  it"画像投稿ページのリクエストは正しいか"do
-   get locations_id_post_path
-   expect(response.status).to eq(200)
+  it"mapページが表示されること"do
+   get map_url
+   expect(response.body).to include "全国のキャンプ場"
+  end 
+  
+   it"詳細ページのリクエストは正しいか"do
+    get detail_url
+    expect(response.body).to include "同志の森"
+   end
+
  end
 end
