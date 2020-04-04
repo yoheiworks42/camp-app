@@ -10,22 +10,18 @@ Rails.application.routes.draw do
   get "/users", to:'users#new'
   #get "/users/:id/edit",to:'users#edit'
   #post "/users/:id/edit",to:"users#update"
-
   resources :users
 
-  #get "/test",to:"locations#test"
   get "/index",to:'locations#index'
-  get "/locations/:id",to:'locations#show'
   get "/locations",to:'locations#new'
   post "/locations",to:'locations#create'
   get "/map",to:'locations#map'
-  #resources :locations
+  #get "/test",to:"locations#test"
+  #get "/locations/:id",to:'locations#show'
+  resources :locations
 
-  #get "/locations/:id/post",to:"posts#new"
-  #post "/locations/:id/post",to:"posts#create"
-  resources :locations do
-   resources :posts
-  end
-
+  get "/locations/:id/post",to:"posts#new"
+  post "/locations/:id/post",to:"posts#create"
+  resources :posts
 
 end

@@ -39,7 +39,7 @@ RSpec.describe"user", type: :model do
  it"確認用パスワードが一致しないなら無効なこと"do
   user=FactoryBot.build(:user,password: "password",password_confirmation:"testtest")
   user.valid?
-  expect(user.errors[:password_confirmation]).to include("確認用パスワードとパスワードの入力が一致しません")
+  expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません")
  end
  
 end
