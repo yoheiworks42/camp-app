@@ -18,7 +18,7 @@ RSpec.describe Location, type: :model do
   it "地図が指定されていないと無効なこと" do
    location = FactoryBot.build(:location, geolat: nil)
    location.valid?
-   expect(location.errors[:geolat]).to include "地図上で場所をクリックしてください" 
+   expect(location.errors[:geolat]).to include "で場所をクリックしてください" 
   end  
   
   it"top_imgがないと無効なこと"do

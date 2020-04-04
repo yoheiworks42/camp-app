@@ -12,7 +12,7 @@ RSpec.describe"Location", type: :request do
   end
   
   it"追加ページが表示されること"do
-   get locations_url
+   get locations_1_url
    expect(response.body).to include "キャンプ場を追加する"
   end
   
