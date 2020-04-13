@@ -26,7 +26,7 @@ require "rails_helper"
     click_button "登録する"
    end
    it"エラーメッセージを表示"do
-    expect(page).to have_content "確認してください"
+    expect(page).to have_content "入力してください"
    end
  end
 end

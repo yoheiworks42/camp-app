@@ -11,18 +11,13 @@ RSpec.describe"Location", type: :request do
    expect(response.body).to include "キャンプ場一覧"
   end
   
-  it"追加ページが表示されること"do
-   get locations_1_url
-   expect(response.body).to include "キャンプ場を追加する"
-  end
-  
   it"mapページが表示されること"do
    get map_url
    expect(response.body).to include "全国のキャンプ場"
   end 
   
-   it"詳細ページのリクエストは正しいか"do
-    get detail_url
+   it"詳細ページが表示されること"do
+    get locations_id_url
     expect(response.body).to include "同志の森"
    end
 
