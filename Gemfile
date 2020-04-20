@@ -4,6 +4,7 @@ gem 'rails', '~> 5.1.6'
 gem 'puma', '~> 3.12.4'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
@@ -34,7 +35,6 @@ gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'sqlite3', '1.3.13'
 end
 
 group :development do

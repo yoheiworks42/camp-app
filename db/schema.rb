@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200331233901) do
+ActiveRecord::Schema.define(version: 20200317033538) do
 
-  create_table "locations", force: :cascade do |t|
+  create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "name"
     t.text "address"
     t.datetime "created_at", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20200331233901) do
     t.string "geolng"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "post_img"
     t.string "location_id"
     t.string "user_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20200331233901) do
     t.index ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
