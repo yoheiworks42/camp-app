@@ -198,39 +198,47 @@ var get_hour = function(hour){
 var get_today = function(today){
  var todaya=today.split(/\s/);
  var todayb=todaya[0].split("-");
- if(todayb[1]!="10"){
+ if(todayb[1]!="10"||"11"||"12"){
   var todayc=todayb[1].split("0");
  }else{
   var todayc=todayb[1]
  }
  if(todayb[2]!="10"||"20"||"30"){
-  var todayd=todayb[2].split("0");
+  if(todayb[2].match(/0/)){
+   var todayd=todayb[2].split("0");
+   return todayc[1]+"/"+todayd[1];   
+  }else{
+   return todayc[1]+"/"+todayb[2]; 
+  }
  }else{
-  var todayd=todayb[2]
+  return todayc[1]+"/"+todayb[2]; 
  }
  var thour1=today.split(":");
  var thour2=thour1[0].split(/\s/);
- return todayc[1]+"/"+todayd[1];
 }
 
 //日付変換tomorrow
 var get_day = function(day){
  var daya=day.split(/\s/);
  var dayb=daya[0].split("-");
- if(dayb[1]!="10"){
+ if(dayb[1]!="10"||"11"||"12"){
   var dayc=dayb[1].split("0");
  }else{
   var dayc=dayb[1]
  }
  if(dayb[2]!="10"||"20"||"30"){
-  var dayd=dayb[2].split("0");
+  if (dayb[2].match(/0/)){
+   var dayd=dayb[2].split("0");
+  }else{
+   var dayd=dayb[2]
+  }
  }else{
   var dayd=dayb[2]
  }
  var hour1=day.split(":");
  var hour2=hour1[0].split(/\s/);
   if (hour2[1]=="00") {
-   dayreturn=dayc[1]+"/"+dayd[1];
+   dayreturn=dayc[1]+"/"+dayd[0]+dayd[1];
   }else{
    dayreturn=null;
   }
